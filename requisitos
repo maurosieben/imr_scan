@@ -1,0 +1,16 @@
+	Procurar por variações de He1/He2 > 0,1 % desde a última varredura – caso tenha perdido hélio, “flag Helium loss”
+
+	Caso > 10%, “flag vermelha”
+		
+
+	Procurar por dados de MP > SET_MP (= 15.3 psi para máquinas de 1,5 T) desde a última varredura – “flag pressão alta”
+
+	Caso MP > VENT_VALVE_PRESSURE (= 16 psi para 1,5 T), “flag válvula aberta” 
+	(Salvar a data e o número da leitura, seguido do valor e status)
+
+	Ver se CHT está > CH_MAX_TEMP (=50) – “cold head quente”
+
+	Ver se CHT = CH_DISC (=27.3), “sensor temperatura desconectado”
+
+	(Salvar a data e o número da leitura, seguido do valor e status)
+
