@@ -30,8 +30,8 @@ def diff(old, new):
 
 # checks mp values and generates a log file
 def mpcheck():
-    fw = open("%s/mp.log" %prog_dir, "w")
-    fr = open("%s/data.csv" %prog_dir, "r")
+    fw = open("%s/logs/mp.log" %prog_dir, "w")
+    fr = open("%s/data/data.csv" %prog_dir, "r")
     for lines in fr:
         line = lines.split(",")
         if float(line[8]) > set_mp:
@@ -43,15 +43,15 @@ def mpcheck():
             pass
     fw.close()
     fr.close()
-    subprocess.Popen("gedit %s/mp.log  &" %prog_dir, stderr= subprocess.PIPE,stdout= subprocess.PIPE,shell=True)
+    #subprocess.Popen("gedit %s/mp.log  &" %prog_dir, stderr= subprocess.PIPE,stdout= subprocess.PIPE,shell=True)
 
 # checks cht values and generates a log file    
 def chtcheck():
-    fw = open("%s/cht.log" %prog_dir, "w")
-    fr = open("%s/data.csv" %prog_dir, "r")
+    fw = open("%s/logs/cht.log" %prog_dir, "w")
+    fr = open("%s/data/data.csv" %prog_dir, "r")
     for lines in fr:
         line = lines.split(",")
-        print float(line[4])
+#        print float(line[4])
         if float(line[4]) > cht_max:
             fw.write("On %s hot cold head, cht = %s \n" %(line[1],line[4]))
             
@@ -61,7 +61,7 @@ def chtcheck():
             pass
     fw.close()
     fr.close()
-    subprocess.Popen("gedit %s/cht.log  &" %prog_dir, stderr= subprocess.PIPE,stdout= subprocess.PIPE,shell=True)
+#    subprocess.Popen("gedit %s/cht.log  &" %prog_dir, stderr= subprocess.PIPE,stdout= subprocess.PIPE,shell=True)
 
 
 
@@ -77,7 +77,36 @@ def plot_he(array1,array2,array3,array4):
     plt.legend(handles=[red_patch,blue_patch])
     plt.ylabel('He1/He2')
     plt.xlabel('Leitura')
-    plt.show()
+    #plt.figure()
+    plt.savefig("%s/images/he" %prog_dir)
+    plt.close()
+    #plt.show()
+
+# chooses the scan and return an array with the log
+def choose_scan(scan_name):
+    res = []
+    if scan_name == 'ch':
+        chtcheck()
+        res = read_f("logs/cht.log")
+    elif scan_name == 'mp':
+        mpcheck()
+        res = read_f("logs/mp.log")
+    else:
+        pass
+    return res
+
+# read a file and returns an array 
+    
+def read_f(fname):
+    lines = []
+    fr = open("%s/%s" %(prog_dir,fname), "r")
+    for line in fr:
+        lines.append(line)
+
+    fr.close()
+    return lines
+
+    
     
 #print an array
 def print_array(array):
@@ -101,7 +130,7 @@ def array_p(array,p):
 # quadratic approximation
 # references: http://ssdi.di.fct.unl.pt/comp/1112/aulas/teoricas/aulaT10.pdf
 def adjcurve():
-    fr = open("%s/data.csv" %prog_dir, "r+")
+    fr = open("%s/data/data.csv" %prog_dir, "r+")
     global he1_data 
     global he2_data
     # measurements array
@@ -156,9 +185,12 @@ def adjcurve():
     return he1, he2
 
 #chtcheck()
+#
 #mpcheck()
 #plot_he()
 he1,he2 = adjcurve()
 
 plot_he(he1,he2,he1_data,he2_data)
 #plot_he(he1_data,he2_data)
+
+#print read_f("mp.log")
