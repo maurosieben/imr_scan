@@ -133,7 +133,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="hegraph_2">
+   <widget class="QGraphicsView" name="phapgraph">
     <property name="geometry">
      <rect>
       <x>500</x>
@@ -143,7 +143,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="hegraph_3">
+   <widget class="QGraphicsView" name="dpgraph">
     <property name="geometry">
      <rect>
       <x>960</x>

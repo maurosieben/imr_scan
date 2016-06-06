@@ -63,24 +63,31 @@ def chtcheck():
     fr.close()
 #    subprocess.Popen("gedit %s/cht.log  &" %prog_dir, stderr= subprocess.PIPE,stdout= subprocess.PIPE,shell=True)
 
-
-
 # plots He graph
-def plot_he(array1,array2,array3,array4):
+def plot_he(array1,array2): #,array3,array4):
     plt.plot(array1, 'r')
     plt.plot(array2, 'b')
-    plt.plot(array3, 'ro')
-    plt.plot(array4, 'bo')
+    #plt.plot(array3, 'r')
+    #plt.plot(array4, 'b')
     red_patch = mpatches.Patch(color='red', label='He1')
     blue_patch = mpatches.Patch(color='blue', label='He2')
     plt.legend(handles=[red_patch])
     plt.legend(handles=[red_patch,blue_patch])
     plt.ylabel('He1/He2')
     plt.xlabel('Leitura')
-    #plt.figure()
     plt.savefig("%s/images/he" %prog_dir)
     plt.close()
-    #plt.show()
+
+def plot(array1, fname): 
+    plt.plot(array1, 'r')
+    red_patch = mpatches.Patch(color='red', label='%s'%fname)
+    #blue_patch = mpatches.Patch(color='blue', label='He2')
+    plt.legend(handles=[red_patch])
+    #plt.legend(handles=[red_patch,blue_patch])
+    plt.ylabel('%s' %fname)
+    plt.xlabel('Leitura')
+    plt.savefig("%s/images/%s" %(prog_dir,fname))
+    plt.close()
 
 # chooses the scan and return an array with the log
 def choose_scan(scan_name):
@@ -105,8 +112,6 @@ def read_f(fname):
 
     fr.close()
     return lines
-
-    
     
 #print an array
 def print_array(array):
@@ -184,13 +189,18 @@ def adjcurve():
     he2 = he2_a[0] + numpy.multiply(leit,he2_a[1]) + numpy.multiply(leit2,he2_a[2])
     return he1, he2
 
-#chtcheck()
-#
-#mpcheck()
-#plot_he()
+def get_data(fname, col):
+    fr = open("%s/data/%s" %(prog_dir,fname), "r")
+    # measurements array
+    data = []
+    for lines in fr:
+        line = lines.split(",")
+        data.append(float(line[col]))
+    fr.close()
+    return data
+    
 he1,he2 = adjcurve()
-
-plot_he(he1,he2,he1_data,he2_data)
-#plot_he(he1_data,he2_data)
-
-#print read_f("mp.log")
+#plot_he(he1,he2,he1_data,he2_data)
+plot_he(he1_data,he2_data)
+plot(get_data('data.csv', 7), 'PHAP')
+plot(get_data('data.csv', 12), 'DP')

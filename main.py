@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Thu Jun  2 15:00:22 2016
+# Created: Mon Jun  6 13:00:34 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -66,12 +66,12 @@ class Ui_MainWindow(object):
         self.hegraph = QtGui.QGraphicsView(self.centralwidget)
         self.hegraph.setGeometry(QtCore.QRect(30, 310, 371, 301))
         self.hegraph.setObjectName(_fromUtf8("hegraph"))
-        self.hegraph_2 = QtGui.QGraphicsView(self.centralwidget)
-        self.hegraph_2.setGeometry(QtCore.QRect(500, 310, 361, 301))
-        self.hegraph_2.setObjectName(_fromUtf8("hegraph_2"))
-        self.hegraph_3 = QtGui.QGraphicsView(self.centralwidget)
-        self.hegraph_3.setGeometry(QtCore.QRect(960, 310, 351, 301))
-        self.hegraph_3.setObjectName(_fromUtf8("hegraph_3"))
+        self.phapgraph = QtGui.QGraphicsView(self.centralwidget)
+        self.phapgraph.setGeometry(QtCore.QRect(500, 310, 361, 301))
+        self.phapgraph.setObjectName(_fromUtf8("phapgraph"))
+        self.dpgraph = QtGui.QGraphicsView(self.centralwidget)
+        self.dpgraph.setGeometry(QtCore.QRect(960, 310, 351, 301))
+        self.dpgraph.setObjectName(_fromUtf8("dpgraph"))
         self.label = QtGui.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(180, 280, 41, 16))
         font = QtGui.QFont()
